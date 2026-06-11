@@ -10604,50 +10604,6 @@ KONTAKTIEREN SIE UNSEREN SUPPORT
 
 
 </div><script src="../../cdn-assets/storefront/standard-actions.js" type="module" data-source-attribution="shopify.standard_actions"></script>
-<style id="vg-css">
-.vg-gallery{width:100%;max-width:600px;margin:0 auto}
-.vg-main{position:relative;width:100%;background:#f7f7f5;border-radius:12px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
-.vg-main-img{width:100%;height:100%;object-fit:contain;display:block}
-.vg-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:#16355c;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:2}
-.vg-prev{left:10px}.vg-next{right:10px}
-.vg-thumbs{display:flex;gap:8px;overflow-x:auto;padding:10px 2px;scrollbar-width:thin}
-.vg-thumb{width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;flex:0 0 auto;background:#f2f2f2}
-.vg-thumb.active{border-color:#16355c}
-.product-media-gallery-main-slider .splide,.product-media-gallery-main-slider .splide__track{display:none!important}
-</style>
-<script id="vg-js">
-(function(){
-function init(){
-  var c=document.querySelector(".product-media-gallery-main-slider");
-  if(!c||c.querySelector(".vg-gallery"))return;
-  var imgs=c.querySelectorAll("img"),urls=[];
-  imgs.forEach(function(im){
-    var s=im.getAttribute("src")||im.getAttribute("data-src")||"";
-    if(!s)return;
-    var base=s.split("?")[0].split("&")[0];
-    if(/\.(webp|jpg|jpeg|png|gif)$/i.test(base)&&urls.indexOf(base)<0)urls.push(base);
-  });
-  if(urls.length<2)return;
-  var cur=0;
-  var wrap=document.createElement("div");wrap.className="vg-gallery";
-  var main=document.createElement("div");main.className="vg-main";
-  var mimg=document.createElement("img");mimg.className="vg-main-img";mimg.src=urls[0];main.appendChild(mimg);
-  var prev=document.createElement("button");prev.className="vg-nav vg-prev";prev.innerHTML="‹";
-  var next=document.createElement("button");next.className="vg-nav vg-next";next.innerHTML="›";
-  main.appendChild(prev);main.appendChild(next);
-  var th=document.createElement("div");th.className="vg-thumbs";
-  urls.forEach(function(u,i){
-    var t=document.createElement("img");t.className="vg-thumb"+(i===0?" active":"");t.src=u;t.loading="lazy";
-    t.addEventListener("click",function(){set(i);});th.appendChild(t);
-  });
-  function set(i){cur=(i+urls.length)%urls.length;mimg.src=urls[cur];th.querySelectorAll(".vg-thumb").forEach(function(x,j){x.classList.toggle("active",j===cur);});var a=th.querySelectorAll(".vg-thumb")[cur];if(a)a.scrollIntoView({inline:"center",block:"nearest"});}
-  prev.addEventListener("click",function(){set(cur-1);});
-  next.addEventListener("click",function(){set(cur+1);});
-  wrap.appendChild(main);wrap.appendChild(th);
-  c.innerHTML="";c.appendChild(wrap);
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
-setTimeout(init,1200);setTimeout(init,3000);
-})();
-</script></body>
+
+<style id="vg-css">.product-media-gallery-main-slider>*{display:none!important}.vg-gallery{display:block!important;width:100%;max-width:600px;margin:0 auto}.vg-main{position:relative;width:100%;background:#f7f7f5;border-radius:12px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}.vg-main-img{width:100%;height:100%;object-fit:contain;display:block}.vg-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:#16355c;font-size:26px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:3}.vg-prev{left:10px}.vg-next{right:10px}.vg-thumbs{display:flex;gap:8px;overflow-x:auto;padding:10px 2px}.vg-thumb{width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;flex:0 0 auto;background:#f2f2f2}.vg-thumb.active{border-color:#16355c}</style><script id="vg-js">(function(){var U=["/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_15.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_25_-converti-depuis-png.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_23_-converti-depuis-png.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/SocksCompressionZipDE_16.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_24_-converti-depuis-png.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks-Compression-Zip-DE-_8_f4428b11-862d-4012-b5c3-4fcb67b9a65a.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_18.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_26_-converti-depuis-png.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks-Compression-Zip-DE-_33.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/socksdezip.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_9.png","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Socks_Compression_Zip_DE_10.png","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/cremallera-lateral-medias-compresion-espa_a.gif","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/hf_20260527_133449_3f394002-2e22-4442-8450-ebd17587c30e.webp","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/Gemini_Generated_Image_n2tqzhn2tqzhn2tq.png","/wp-content/themes/restora/assets/veinora-clone/site/cdn/shop/files/ChatGPT_Image_21_avr._2026_22_51_53.png"];function init(){var c=document.querySelector(".product-media-gallery-main-slider");if(!c)return;if(c.querySelector(".vg-gallery"))return;var cur=0;var w=document.createElement("div");w.className="vg-gallery";var m=document.createElement("div");m.className="vg-main";var mi=document.createElement("img");mi.className="vg-main-img";mi.src=U[0];m.appendChild(mi);var p=document.createElement("button");p.className="vg-nav vg-prev";p.innerHTML="‹";var n=document.createElement("button");n.className="vg-nav vg-next";n.innerHTML="›";m.appendChild(p);m.appendChild(n);var t=document.createElement("div");t.className="vg-thumbs";U.forEach(function(u,i){var x=document.createElement("img");x.className="vg-thumb"+(i===0?" active":"");x.src=u;x.loading="lazy";x.onerror=function(){x.style.display="none"};x.addEventListener("click",function(){set(i)});t.appendChild(x)});function set(i){cur=(i+U.length)%U.length;mi.src=U[cur];var ts=t.querySelectorAll(".vg-thumb");ts.forEach(function(z,j){z.classList.toggle("active",j===cur)});if(ts[cur])ts[cur].scrollIntoView({inline:"center",block:"nearest"})}p.addEventListener("click",function(){set(cur-1)});n.addEventListener("click",function(){set(cur+1)});w.appendChild(m);w.appendChild(t);c.appendChild(w)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();setTimeout(init,800);setTimeout(init,2500);})();</script></body>
 </html>
