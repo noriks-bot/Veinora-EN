@@ -2232,7 +2232,7 @@ first.parentNode.insertBefore(script, first);
   data-shs-logs-sample-rate="1"
   data-shs-beacon-endpoint="https://veinora.com/api/collect"
 ></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,300,0..1,0&display=block"><style id="veinora-gallery-fix">.product-media-gallery-main-slider .splide__track{overflow:visible!important;height:auto!important}.product-media-gallery-main-slider .splide__list{display:block!important}.product-media-gallery-main-slider .splide__slide{display:none!important}.product-media-gallery-main-slider .splide__slide:first-child{display:block!important;opacity:1!important;visibility:visible!important;width:100%!important}.product-media-gallery-main-slider img{display:block!important;max-width:100%!important;height:auto!important}</style></head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,300,0..1,0&display=block"></head>
 
   <body>
     <toast-notification class="toast-notification card">
@@ -10604,5 +10604,50 @@ KONTAKTIEREN SIE UNSEREN SUPPORT
 
 
 </div><script src="../../cdn-assets/storefront/standard-actions.js" type="module" data-source-attribution="shopify.standard_actions"></script>
-</body>
+<style id="vg-css">
+.vg-gallery{width:100%;max-width:600px;margin:0 auto}
+.vg-main{position:relative;width:100%;background:#f7f7f5;border-radius:12px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.vg-main-img{width:100%;height:100%;object-fit:contain;display:block}
+.vg-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:#16355c;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:2}
+.vg-prev{left:10px}.vg-next{right:10px}
+.vg-thumbs{display:flex;gap:8px;overflow-x:auto;padding:10px 2px;scrollbar-width:thin}
+.vg-thumb{width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;flex:0 0 auto;background:#f2f2f2}
+.vg-thumb.active{border-color:#16355c}
+.product-media-gallery-main-slider .splide,.product-media-gallery-main-slider .splide__track{display:none!important}
+</style>
+<script id="vg-js">
+(function(){
+function init(){
+  var c=document.querySelector(".product-media-gallery-main-slider");
+  if(!c||c.querySelector(".vg-gallery"))return;
+  var imgs=c.querySelectorAll("img"),urls=[];
+  imgs.forEach(function(im){
+    var s=im.getAttribute("src")||im.getAttribute("data-src")||"";
+    if(!s)return;
+    var base=s.split("?")[0].split("&")[0];
+    if(/\.(webp|jpg|jpeg|png|gif)$/i.test(base)&&urls.indexOf(base)<0)urls.push(base);
+  });
+  if(urls.length<2)return;
+  var cur=0;
+  var wrap=document.createElement("div");wrap.className="vg-gallery";
+  var main=document.createElement("div");main.className="vg-main";
+  var mimg=document.createElement("img");mimg.className="vg-main-img";mimg.src=urls[0];main.appendChild(mimg);
+  var prev=document.createElement("button");prev.className="vg-nav vg-prev";prev.innerHTML="‹";
+  var next=document.createElement("button");next.className="vg-nav vg-next";next.innerHTML="›";
+  main.appendChild(prev);main.appendChild(next);
+  var th=document.createElement("div");th.className="vg-thumbs";
+  urls.forEach(function(u,i){
+    var t=document.createElement("img");t.className="vg-thumb"+(i===0?" active":"");t.src=u;t.loading="lazy";
+    t.addEventListener("click",function(){set(i);});th.appendChild(t);
+  });
+  function set(i){cur=(i+urls.length)%urls.length;mimg.src=urls[cur];th.querySelectorAll(".vg-thumb").forEach(function(x,j){x.classList.toggle("active",j===cur);});var a=th.querySelectorAll(".vg-thumb")[cur];if(a)a.scrollIntoView({inline:"center",block:"nearest"});}
+  prev.addEventListener("click",function(){set(cur-1);});
+  next.addEventListener("click",function(){set(cur+1);});
+  wrap.appendChild(main);wrap.appendChild(th);
+  c.innerHTML="";c.appendChild(wrap);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+setTimeout(init,1200);setTimeout(init,3000);
+})();
+</script></body>
 </html>
