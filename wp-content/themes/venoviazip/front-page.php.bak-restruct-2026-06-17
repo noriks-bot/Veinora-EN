@@ -1,0 +1,223 @@
+<?php
+/**
+ * venoviazip front page.
+ *
+ * @package venoviazip
+ */
+
+$source_file = '/var/www/venoviazip/en/static/site/products/kompressionsstrumpfe-mit-reissverschluss-align.html';
+
+if ( ! file_exists( $source_file ) ) {
+    status_header( 500 );
+    echo 'Clone source missing: ' . esc_html( $source_file );
+    exit;
+}
+
+$html = file_get_contents( $source_file );
+
+// === BORIS PATCH: strip broken Shopify-clone refs + inject WC add-to-cart ===
+$html = preg_replace(
+    array(
+        // External third-party that 403/404
+        '#<link[^>]*href="(https?:)?//js\.shrinetheme\.com[^"]*"[^>]*>#i',
+        '#<script[^>]*src="(https?:)?//js\.shrinetheme\.com[^"]*"[^>]*></script>#i',
+        '#<script[^>]*src="(https?:)?//shopify\.jsdeliver\.cloud[^"]*"[^>]*></script>#i',
+        '#<script[^>]*src="(https?:)?//d1um8515vdn9kb\.cloudfront\.net[^"]*"[^>]*></script>#i',
+        '#<link[^>]*href="(https?:)?//d1um8515vdn9kb\.cloudfront\.net[^"]*"[^>]*>#i',
+        '#<script[^>]*src="(https?:)?//tag\.segmetrics\.io[^"]*"[^>]*></script>#i',
+        '#<script[^>]*src="(https?:)?//(cdn\.)?judge\.me[^"]*"[^>]*></script>#i',
+        '#<link[^>]*href="(https?:)?//(cdn\.)?judge\.me[^"]*"[^>]*>#i',
+        '#<script[^>]*src="(https?:)?//shop\.app/[^"]*"[^>]*></script>#i',
+        '#<script[^>]*src="(https?:)?//(cdn\.)?shopify\.com[^"]*"[^>]*></script>#i',
+        // Any reference (anywhere in URL) pointing to Shopify infra that returns 404 on our WP
+        '#<script[^>]*src="[^"]*shopifycloud[^"]*"[^>]*></script>#i',
+        '#<link[^>]*href="[^"]*shopifycloud[^"]*"[^>]*>#i',
+        '#<script[^>]*src="[^"]*compiled_assets/scripts\.js[^"]*"[^>]*></script>#i',
+        '#<script[^>]*src="[^"]*checkouts/internal/preloads\.js[^"]*"[^>]*></script>#i',
+        '#<script[^>]*src="[^"]*gempagev2\.js[^"]*"[^>]*></script>#i',
+        // Shopify Pixel Manager (trekkie shim) — refs Shopify backend
+        '#<script[^>]*src="[^"]*/cdn/wpm/[^"]*"[^>]*></script>#is',
+        '#<script[^>]*data-trekkie-shim[^>]*></script>#is',
+        // Judge.me reviews (broken local copy)
+        '#<script[^>]*src="[^"]*judge\.me[^"]*"[^>]*></script>#i',
+        '#<link[^>]*href="[^"]*judge\.me[^"]*"[^>]*>#i',
+        '#<noscript>\s*<link[^>]*judge\.me[^"]*>\s*</noscript>#is',
+        // shop.app preconnect/dns-prefetch
+        '#<link[^>]*(href|src)="(https?:)?//shop\.app[^"]*"[^>]*>#i',
+        // Inline Shopify.PaymentButton.init that dynamically loads portable-wallets
+        '#<script[^>]*data-source-attribution="shopify\.dynamic_checkout\.dynamic\.init"[^>]*>[\s\S]*?</script>#i',
+        // Bare /cdn/ refs (resolve to non-existent on our domain)
+        '#<script[^>]*src="/cdn/[^"]*"[^>]*></script>#i',
+        '#<link[^>]*href="/cdn/[^"]*"[^>]*>#i',
+        // Shopify app widgets we don\'t want / that 404 (upsell, upcart, post-purchase, content protector)
+        '#<script[^>]*src="[^"]*(protector\.js|lb-utils|lb-upsell|upcart|post-purchase-upsell|aftersell|standard-actions\.js|stylex-)[^"]*"[^>]*>\s*</script>#i',
+        '#<link[^>]*href="[^"]*(lb-utils|lb-upsell|upcart|post-purchase-upsell|aftersell|standard-actions\.js|stylex-)[^"]*"[^>]*>#i',
+    ),
+    "\n",
+    $html
+);
+
+// Inject WC add-to-cart handler before </body>
+$wc_product_id = 10;
+$wc_cart_url   = function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '/checkout/';
+$wc_handler = '<script>(function(){
+  var PID = ' . intval( $wc_product_id ) . ';
+  var CART = ' . wp_json_encode( $wc_cart_url ) . ';
+  function bind(){
+    var selectors = [
+      "button[name=\"add\"]","button.add-to-cart","button[data-add-to-cart]",
+      "form[action*=cart] button[type=submit]",
+      "a.add-to-cart","[data-product-add-to-cart]","button.product-form__submit",
+      "button#AddToCart","button[id*=AddToCart]","button[class*=add-to-cart]",
+      "button[class*=AddToCart]","button[class*=product-form__cart]",
+      "button[class*=cart-btn]","button[class*=buy-now]",
+      "input[name=add]","[data-buy-now]","[data-add-to-cart-button]"
+    ];
+    var btns = document.querySelectorAll(selectors.join(","));
+    btns.forEach(function(b){
+      if (b.dataset.wcBound) return;
+      b.dataset.wcBound = "1";
+      b.addEventListener("click", function(e){
+        e.preventDefault(); e.stopPropagation();
+        var qtyEl = document.querySelector("input[name=quantity],input.qty,[data-quantity]");
+        var qty = qtyEl ? (parseInt(qtyEl.value,10)||1) : 1;
+        var orig = b.innerHTML;
+        try { b.innerHTML = "Adding…"; b.disabled = true; } catch(_){}
+        var body = new URLSearchParams();
+        body.append("product_id", PID);
+        body.append("quantity", qty);
+        fetch("/?wc-ajax=add_to_cart", {
+          method: "POST",
+          credentials: "include",
+          headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          body: body.toString()
+        }).then(function(r){return r.text();})
+          .then(function(){ window.location.href = CART; })
+          .catch(function(){ window.location.href = "/?add-to-cart=" + PID + "&quantity=" + qty; });
+      }, true);
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bind);
+  } else { bind(); }
+  setTimeout(bind, 1500); setTimeout(bind, 3500);
+})();</script>';
+
+// Variant swatch -> main image switcher (original used Shopify section rendering, broken on static clone)
+$wc_handler .= '<script>(function(){
+  function basename(u){ return (u||"").split("?")[0].split("/").pop(); }
+  function init(){
+    var colorToFile = {};
+    var pj = document.querySelector("script.kaching-bundles-product");
+    if (pj) {
+      try {
+        var data = JSON.parse(pj.textContent);
+        (data.variants || []).forEach(function(v){
+          if (v.options && v.options[0] && v.image) colorToFile[v.options[0]] = basename(v.image);
+        });
+      } catch(_) {}
+    }
+    var slides = Array.prototype.slice.call(document.querySelectorAll("li.product__media-item"));
+    function slideForFile(fn){
+      for (var i = 0; i < slides.length; i++) {
+        var img = slides[i].querySelector("img");
+        if (img && basename(img.getAttribute("src")) === fn) return slides[i];
+      }
+      return null;
+    }
+    function mainImg(){
+      return document.querySelector("li.product__media-item.is-active img") ||
+             document.querySelector("li.product__media-item img");
+    }
+    function showSlideImage(slide, fn){
+      var mi = mainImg();
+      if (!mi) return;
+      if (slide) {
+        var si = slide.querySelector("img");
+        if (si) {
+          if (si.getAttribute("srcset")) { mi.setAttribute("srcset", si.getAttribute("srcset")); }
+          else { mi.removeAttribute("srcset"); }
+          mi.src = si.getAttribute("src");
+          return;
+        }
+      }
+      if (fn) {
+        mi.removeAttribute("srcset");
+        mi.src = "/static/site/cdn/shop/files/" + fn + "?width=1946";
+      }
+    }
+    // color swatch click -> swap main image src
+    document.querySelectorAll("input.swatch-input__input").forEach(function(r){
+      r.addEventListener("change", function(){
+        var sel = document.querySelector("[data-selected-value]");
+        if (sel) sel.textContent = r.value;
+        var fn = colorToFile[r.value];
+        if (!fn) return;
+        showSlideImage(slideForFile(fn), fn);
+      });
+    });
+    // thumbnail click -> swap main image src
+    document.querySelectorAll("li.thumbnail-list__item").forEach(function(li){
+      var btn = li.querySelector("button.thumbnail");
+      if (!btn) return;
+      btn.addEventListener("click", function(){
+        var t = li.getAttribute("data-target");
+        var target = document.querySelector("li.product__media-item[data-media-id=\'" + t + "\']");
+        showSlideImage(target, null);
+      });
+    });
+    // keep ATC button always enabled for every color (theme marks some variants unavailable)
+    function fixAtcButtons(){
+      document.querySelectorAll("button[name=\'add\'], button.product-form__submit").forEach(function(b){
+        if (b.disabled) b.disabled = false;
+        if (b.hasAttribute("disabled")) b.removeAttribute("disabled");
+        if (b.classList.contains("disabled")) b.classList.remove("disabled");
+        if (b.getAttribute("aria-disabled") === "true") b.setAttribute("aria-disabled", "false");
+        var sp = b.querySelector("span") || b;
+        var t = (sp.textContent || "").trim().toLowerCase();
+        if (t.indexOf("unavailable") !== -1 || t.indexOf("sold out") !== -1) {
+          sp.textContent = "ADD TO CART";
+        }
+      });
+    }
+    fixAtcButtons();
+    setInterval(fixAtcButtons, 500);
+  }
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); }
+  else { init(); }
+})();</script>';
+
+// Homepage clone: intercept product/collection links -> add product 10 to cart -> checkout
+$wc_handler .= '<script>(function(){
+  var PID = ' . intval( $wc_product_id ) . ';
+  var CART = ' . wp_json_encode( $wc_cart_url ) . ';
+  function go(e){
+    e.preventDefault(); e.stopPropagation();
+    var body = new URLSearchParams();
+    body.append("product_id", PID);
+    body.append("quantity", 1);
+    fetch("/?wc-ajax=add_to_cart", {
+      method: "POST",
+      credentials: "include",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: body.toString()
+    }).then(function(){ window.location.href = CART; })
+      .catch(function(){ window.location.href = "/?add-to-cart=" + PID; });
+  }
+  function bindLinks(){
+    document.querySelectorAll("a[href*=\'/products/\'],a[href*=\'/collections/\'],a[href*=\'/cart\']").forEach(function(a){
+      if (a.dataset.wcLinkBound) return;
+      a.dataset.wcLinkBound = "1";
+      a.addEventListener("click", go, true);
+    });
+  }
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", bindLinks); }
+  else { bindLinks(); }
+  setTimeout(bindLinks, 1500); setTimeout(bindLinks, 3500);
+})();</script>';
+$html = preg_replace( "#</body>#i", $wc_handler . "</body>", $html, 1 );
+// === END BORIS PATCH ===
+
+header( 'Content-Type: text/html; charset=UTF-8' );
+echo $html;
+exit;
