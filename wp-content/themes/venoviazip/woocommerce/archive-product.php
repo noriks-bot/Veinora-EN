@@ -901,13 +901,13 @@ body.woocommerce-shop #secondary,
 body.woocommerce-shop .widget-area {
   display: none !important;
 }
+body.woocommerce-shop { overflow-x: hidden; }
 /* full-bleed teal banner for the Shop title */
 body.woocommerce-shop .woocommerce-products-header {
   position: relative;
-  width: auto;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  margin-top: 0;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0 0 30px 0;
   margin-bottom: 30px;
   padding: 64px 20px;
   background-color: #f3ffec;
@@ -929,6 +929,19 @@ body.woocommerce-shop .woocommerce-products-header__title.page-title {
   body.woocommerce-shop .woocommerce-products-header__title.page-title { font-size: 1.8rem; }
 }
 </style>
+<script>
+(function(){
+  function moveBanner(){
+    var h=document.querySelector('.woocommerce-products-header');
+    var content=document.getElementById('content');
+    if(!h||!content) return;
+    if(h.parentNode===content && content.firstElementChild===h) return;
+    content.insertBefore(h, content.firstElementChild);
+  }
+  if(document.readyState!=='loading') moveBanner();
+  else document.addEventListener('DOMContentLoaded', moveBanner);
+})();
+</script>
 <!-- /boris-shop-banner -->
 
 
