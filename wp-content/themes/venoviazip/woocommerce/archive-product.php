@@ -910,14 +910,14 @@ body.woocommerce-shop .woocommerce-products-header {
   margin-top: 0;
   margin-bottom: 30px;
   padding: 64px 20px;
-  background-color: #0E7C7B;
-  background-image: linear-gradient(135deg, #0E7C7B 0%, #0a6360 100%);
+  background-color: #f3ffec;
+  background-image: none;
   display: block !important;
   text-align: center;
   box-sizing: border-box;
 }
 body.woocommerce-shop .woocommerce-products-header__title.page-title {
-  color: #ffffff !important;
+  color: #000000 !important;
   font-weight: 800;
   font-size: 2.6rem;
   letter-spacing: 0.5px;
