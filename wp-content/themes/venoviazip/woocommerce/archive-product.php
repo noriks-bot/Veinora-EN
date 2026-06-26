@@ -253,7 +253,7 @@ function is_active_menu_item( $path ) {
 
   <?php
   // Default title for shop
-  $banner_title = 'NORIKS';
+  $banner_title = 'Shop';
 
   // Product category archive
   if ( is_product_category() ) {
@@ -884,6 +884,53 @@ if ( is_shop() ) {
 
 
 <!-- Slick carousel init removed -->
+
+<!-- boris-shop-banner -->
+<style>
+/* shop: full-width layout (override right-sidebar narrow column) */
+body.woocommerce-shop #content,
+body.woocommerce-shop #primary.content-area,
+body.woocommerce-shop main#main.site-main {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  float: none !important;
+}
+body.woocommerce-shop #secondary,
+body.woocommerce-shop .widget-area {
+  display: none !important;
+}
+/* full-bleed teal banner for the Shop title */
+body.woocommerce-shop .woocommerce-products-header {
+  position: relative;
+  width: auto;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: 30px;
+  padding: 64px 20px;
+  background-color: #0E7C7B;
+  background-image: linear-gradient(135deg, #0E7C7B 0%, #0a6360 100%);
+  display: block !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+body.woocommerce-shop .woocommerce-products-header__title.page-title {
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 2.6rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: none;
+}
+@media (max-width: 991px) {
+  body.woocommerce-shop .woocommerce-products-header { padding: 40px 16px; }
+  body.woocommerce-shop .woocommerce-products-header__title.page-title { font-size: 1.8rem; }
+}
+</style>
+<!-- /boris-shop-banner -->
+
 
 
 
