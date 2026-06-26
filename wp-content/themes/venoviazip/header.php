@@ -27,21 +27,228 @@
 <div id="page" class="venoviazip-site">
 
   <?php /* boris-hide-hf */ if ( ! ( ( function_exists( 'is_cart' ) && is_cart() ) || ( function_exists( 'is_checkout' ) && is_checkout() ) ) ) : ?>
-  <!-- Announcement bar -->
-  <div class="cal-announce" role="region" aria-label="Promotions">
-    <div class="cal-announce-track">
-      <div class="cal-announce-content">
-        <span>★ 4.8/5 · 12,000+ happy customers</span>
-        <span>🚚 FREE shipping over 70€</span>
-        <span>↩ 30-day risk-free — money back</span>
-        <span>🔒 Secure payment · SSL encrypted</span>
-        <span>★ 4.8/5 · 12,000+ happy customers</span>
-        <span>🚚 FREE shipping over 70€</span>
-        <span>↩ 30-day risk-free — money back</span>
-        <span>🔒 Secure payment · SSL encrypted</span>
+  <!-- Announcement bar (marquee) -->
+<div
+  class="marquee color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 "
+  style="
+    --margin-top: 0px;
+    --margin-bottom: 0px;
+  "
+  
+>
+  <marquee-component
+    style="
+      --marquee-direction: normal;
+      --marquee-gap: 79px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+    "
+    data-speed-factor="20"
+    data-movement-direction="normal"
+  >
+    <div
+      class="marquee__wrapper"
+      data-ref="wrapper"
+    >
+      <div
+        class="marquee__content"
+        data-ref="content"
+      >
+        <div class="marquee__repeated-items">
+          
+
+
+
+
+  <div
+    class="
+      text-block paragraph text-block-left-desktop text-block-left-mobile"
+    style="
+      --text-align: left;
+      --text-align-mobile: left;
+      --margin-top: 0px;
+      --margin-bottom: 0px;
+      --font-weight: 300;
+      
+        --font-size: var(--font-body--size-emphasized);
+      
+      
+    "
+    
+    
+  >
+    
+      <p><strong>FREE SHIPPING </strong></p>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div
+    class="
+      text-block paragraph text-block-center-desktop text-block-left-mobile"
+    style="
+      --text-align: center;
+      --text-align-mobile: left;
+      --margin-top: 0px;
+      --margin-bottom: 0px;
+      --font-weight: 300;
+      
+        --font-size: var(--font-body--size-emphasized);
+      
+      
+    "
+    
+    
+  >
+    
+      <p><strong>LIMITED OFFER</strong></p>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div
+    class="
+      text-block paragraph text-block-center-desktop text-block-left-mobile"
+    style="
+      --text-align: center;
+      --text-align-mobile: left;
+      --margin-top: 0px;
+      --margin-bottom: 0px;
+      --font-weight: 300;
+      
+        --font-size: var(--font-body--size-emphasized);
+      
+      
+    "
+    
+    
+  >
+    
+      <p><strong>60-DAY MONEY-BACK GUARANTEE</strong></p>
+    
+  </div>
+
+
+
+
+
+
+        <div class="marquee__repeated-items">
+          
+
+
+
+
+  <div
+    class="
+      text-block paragraph text-block-left-desktop text-block-left-mobile"
+    style="
+      --text-align: left;
+      --text-align-mobile: left;
+      --margin-top: 0px;
+      --margin-bottom: 0px;
+      --font-weight: 300;
+      
+        --font-size: var(--font-body--size-emphasized);
+      
+      
+    "
+    
+    
+  >
+    
+      <p><strong>FREE SHIPPING </strong></p>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div
+    class="
+      text-block paragraph text-block-center-desktop text-block-left-mobile"
+    style="
+      --text-align: center;
+      --text-align-mobile: left;
+      --margin-top: 0px;
+      --margin-bottom: 0px;
+      --font-weight: 300;
+      
+        --font-size: var(--font-body--size-emphasized);
+      
+      
+    "
+    
+    
+  >
+    
+      <p><strong>LIMITED OFFER</strong></p>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div
+    class="
+      text-block paragraph text-block-center-desktop text-block-left-mobile"
+    style="
+      --text-align: center;
+      --text-align-mobile: left;
+      --margin-top: 0px;
+      --margin-bottom: 0px;
+      --font-weight: 300;
+      
+        --font-size: var(--font-body--size-emphasized);
+      
+      
+    "
+    
+    
+  >
+    
+      <p><strong>60-DAY MONEY-BACK GUARANTEE</strong></p>
+    
+  </div>
+
+
+
+
+
+
+        </div>
       </div>
     </div>
-  </div>
+  </marquee-component>
+</div>
 
   <!-- Main header -->
   <header class="cal-header" role="banner">
