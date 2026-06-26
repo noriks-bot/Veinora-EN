@@ -783,7 +783,7 @@ body.calmara-body a { color: inherit; text-decoration: none; }
 /* ===========================================
    FOOTER (newsletter + 4 columns + bottom strip)
    =========================================== */
-.cal-footer { background: var(--cal-blue); color: var(--cal-cream-2); }
+.cal-footer { background: #043474; color: var(--cal-cream-2); }
 .cal-footer .cal-container {
   max-width: 1280px;
   margin: 0 auto;
