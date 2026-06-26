@@ -996,3 +996,9 @@ li.cal-prod-card{list-style:none;margin:0 !important;width:auto !important;float
   .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .text-block,
   .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .text-block p{font-size:.72rem;}
 }
+/* shop: force white content area (only footer is blue) */
+body.woocommerce-shop #page,
+body.woocommerce-shop #content,
+body.woocommerce-shop #primary,
+body.woocommerce-shop main#main.site-main,
+body.woocommerce-shop .wp-site-blocks{background-color:#ffffff !important;}
