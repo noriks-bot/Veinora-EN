@@ -907,8 +907,8 @@ body.woocommerce-shop .woocommerce-products-header {
   position: relative;
   width: 100vw;
   max-width: 100vw;
-  margin: 0 0 30px 0;
-  margin-bottom: 30px;
+  margin: 0;
+  margin-bottom: 0;
   padding: 64px 20px;
   background-color: #f3ffec;
   background-image: none;
@@ -924,7 +924,15 @@ body.woocommerce-shop .woocommerce-products-header__title.page-title {
   margin: 0;
   text-transform: none;
 }
+body.woocommerce-shop ul.products,
+body.woocommerce-shop .products,
+body.woocommerce-shop #content .products {
+  margin-top: 56px !important;
+  margin-bottom: 56px !important;
+}
 @media (max-width: 991px) {
+  body.woocommerce-shop ul.products,
+  body.woocommerce-shop .products { margin-top: 32px !important; margin-bottom: 32px !important; }
   body.woocommerce-shop .woocommerce-products-header { padding: 40px 16px; }
   body.woocommerce-shop .woocommerce-products-header__title.page-title { font-size: 1.8rem; }
 }
