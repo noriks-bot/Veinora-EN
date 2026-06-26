@@ -7,7 +7,7 @@
 
 add_action('wp_enqueue_scripts', function(){ global $wp_styles,$wp_scripts; if($wp_styles){foreach((array)$wp_styles->queue as $h){$src=isset($wp_styles->registered[$h])?$wp_styles->registered[$h]->src:''; if(strpos($src,'/themes/venoviazip/')!==false && strpos($src,'landing.css')===false) wp_dequeue_style($h);}} if($wp_scripts){foreach((array)$wp_scripts->queue as $h){$src=isset($wp_scripts->registered[$h])?$wp_scripts->registered[$h]->src:''; if(strpos($src,'/themes/venoviazip/')!==false) wp_dequeue_script($h);}} },99999); // alen_clone_dequeue
 
-$source_file = '/var/www/venoviazip/en/static/site/products/kompressionsstrumpfe-mit-reissverschluss-align.html';
+$source_file = '/var/www/venoviazip/en/static/site/index.html';
 
 if ( ! file_exists( $source_file ) ) {
     status_header( 500 );
