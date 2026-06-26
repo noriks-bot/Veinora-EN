@@ -1002,3 +1002,40 @@ body.woocommerce-shop #content,
 body.woocommerce-shop #primary,
 body.woocommerce-shop main#main.site-main,
 body.woocommerce-shop .wp-site-blocks{background-color:#ffffff !important;}
+/* hero banner: dark scrim + readable headline over bright photo */
+.image-banner__content{
+  position:relative;
+}
+.image-banner__content::before{
+  content:'';
+  position:absolute;
+  inset:-24px -40px;
+  background:radial-gradient(ellipse at center, rgba(4,52,116,.72) 0%, rgba(4,52,116,.45) 55%, rgba(4,52,116,0) 100%);
+  z-index:0;
+  pointer-events:none;
+  border-radius:24px;
+}
+.image-banner__content > *{ position:relative; z-index:1; }
+.image-banner__content .text-block p,
+.image-banner__content .text-block h1,
+.image-banner__content .text-block h2{
+  color:#ffffff !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.7) !important;
+}
+.image-banner__content .text-block.h2 p{
+  font-weight:800 !important;
+  letter-spacing:.5px;
+  font-size:clamp(1.2rem,2.6vw,2rem) !important;
+  white-space:normal !important;
+  overflow-wrap:break-word;
+}
+
+.image-banner__content .text-block{ max-width:100%; padding-left:8px; padding-right:8px; box-sizing:border-box; }
+.image-banner__content{ overflow:visible; }
+
+/* hero subtext: keep on one readable line, never clipped */
+.image-banner__content .text-block.paragraph p{
+  font-size:clamp(.72rem,1.5vw,1rem) !important;
+  white-space:normal !important;
+}
+.image-banner__content::before{ inset:-24px -80px; }
