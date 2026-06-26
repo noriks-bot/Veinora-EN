@@ -11,20 +11,6 @@
   <?php /* boris-hide-hf */ if ( ! ( function_exists( 'is_cart' ) && is_cart() ) ) : ?>
   <footer class="cal-footer" role="contentinfo">
 
-    <!-- Newsletter strip -->
-    <div class="cal-footer-newsletter">
-      <div class="cal-container cal-footer-newsletter-inner">
-        <div class="cal-footer-newsletter-text">
-          <h3>Be the first to know</h3>
-          <p>Exclusive offers, new products and Exclusive offers, new products and leg care tips.</p>
-        </div>
-        <form class="cal-newsletter-form" action="#" method="post" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Thanks';">
-          <input type="email" name="email" placeholder="Your e-mail" required aria-label="E-mail">
-          <button type="submit">Sign up</button>
-        </form>
-      </div>
-    </div>
-
     <!-- Main footer columns -->
     <div class="cal-footer-main">
       <div class="cal-container cal-footer-grid">
