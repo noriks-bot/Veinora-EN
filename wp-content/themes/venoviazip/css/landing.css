@@ -980,11 +980,11 @@ li.cal-prod-card{list-style:none;margin:0 !important;width:auto !important;float
 .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 marquee-component{display:block;overflow:hidden;}
 .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .marquee__wrapper{overflow:hidden;width:100%;}
 .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .marquee__content{
-  display:flex;width:max-content;
+  display:flex;width:max-content;gap:79px;padding-right:79px;
   animation:boris-marquee 22s linear infinite;
 }
 .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .marquee__repeated-items{
-  display:flex;align-items:center;gap:79px;padding-right:79px;flex:0 0 auto;
+  display:flex;align-items:center;gap:79px;padding-right:0;flex:0 0 auto;
 }
 .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .text-block,
 .marquee.color-scheme-682a99a2-3268-43c2-a338-22f792d019c9 .text-block p{
